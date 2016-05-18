@@ -161,6 +161,10 @@ Plug 'kana/vim-textobj-indent'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'majutsushi/tagbar'
+Plug 'rking/ag.vim'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-session'
 " Plug 'bling/vim-bufferline'
 
 if count(g:bundle_groups, 'tmux')
@@ -672,7 +676,7 @@ call plug#end()
 
 " 标签导航
 " tagbar {{{
-    nmap <F9> :TagbarToggle<CR>
+    nmap <leader>tt :TagbarToggle<CR>
     let g:tagbar_autofocus = 1
     " let g:tagbar_autoshowtag = 1
     " let g:tagbar_show_visibility = 1

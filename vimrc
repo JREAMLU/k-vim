@@ -58,7 +58,7 @@ filetype plugin on
 filetype plugin indent on
 
 " 文件修改之后自动载入
-set autoread
+" set autoread
 set splitright                  " Puts new vsplit windows to the right of the current
 set splitbelow                  " Puts new split windows to the bottom of the current
 " 启动的时候不显示那个援助乌干达儿童的提示
@@ -169,7 +169,7 @@ set title
 " set tm=500
 
 " Remember info about open buffers on close
-set viminfo^=%
+" set viminfo^=%
 
 " For regular expressions turn magic on
 set magic
@@ -327,6 +327,7 @@ set formatoptions+=B
 autocmd! bufwritepost _vimrc source %
 " vimrc文件修改之后自动加载, linux
 autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vimrc.bundles source %
 
 " 自动补全配置
 " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
@@ -362,15 +363,27 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
 " 打开自动定位到最后编辑的位置, 需要确认 .viminfo 当前用户可写
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * call setpos(".", getpos("'\""))
+    " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+func! UniteSessionLoad() 
+    let sessionName = expand("%:p:h") 
+    execute "normal! :UniteSessionLoad " . sessionName . "\<CR>"
+endfunc 
+func! UniteSessionSave() 
+    let sessionName = expand("%:p:h") 
+    execute "normal! :UniteSessionSave " . sessionName . "\<CR>"
+endfunc 
+
+noremap <Leader>sr :call UniteSessionLoad()<CR>
+noremap <Leader>ss :call UniteSessionSave()<CR>
+
 
 "==========================================
 " HotKey Settings  自定义快捷键设置
 "==========================================
-" 设置快捷键将系统剪贴板内容粘贴至 vim"
 
-" 依次遍历子窗口
 noremap <Leader>' vi'
 noremap <Leader>" vi"
 noremap <Leader>( vi(
@@ -560,8 +573,8 @@ let g:last_active_tab = 1
 " nnoremap <leader>gt :execute 'tabnext ' . g:last_active_tab<cr>
 " nnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
 " vnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
-nnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
-autocmd TabLeave * let g:last_active_tab = tabpagenr()
+" nnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
+" autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
 " 新建tab  Ctrl+t
 nnoremap <C-t>     :tabnew<CR>
@@ -579,7 +592,7 @@ map Y y$
 
 " 复制选中区到系统剪切板中
 nmap <leader>y "+y
-nmap <leader><leader>p "+p
+nmap <leader>p "+p
 
 " auto jump to end of select
 " vnoremap <silent> y y`]
@@ -623,8 +636,12 @@ nnoremap ` '
 nnoremap U <C-r>
 
 " Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" nmap <silent> <leader>ev :e $MYVIMRC<CR>
+" nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>vi :vsplit $MYVIMRC<cr>
+nnoremap <leader>vib :vsplit $MYVIMRC.bundles<cr>
+
+nmap <leader>a yaw<esc>:Ag <c-r>"<cr>
 
 "==========================================
 " FileType Settings  文件类型设置
@@ -754,7 +771,6 @@ highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
-
-
-set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
+nmap <leader>y "+y
+nmap <leader>p "+p
 
