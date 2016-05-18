@@ -24,8 +24,8 @@
 "==========================================
 
 " 修改leader键
-let mapleader = ','
-let g:mapleader = ','
+let mapleader = ';'
+let g:mapleader = ';'
 
 " 开启语法高亮
 syntax on
@@ -60,7 +60,7 @@ filetype plugin indent on
 " 文件修改之后自动载入
 set autoread
 " 启动的时候不显示那个援助乌干达儿童的提示
-set shortmess=atI
+" set shortmess=atI
 
 " 备份,到另一个位置. 防止误删, 目前是取消备份
 "set backup
@@ -70,7 +70,7 @@ set shortmess=atI
 " 取消备份。 视情况自己改
 set nobackup
 " 关闭交换文件
-set noswapfile
+" set noswapfile
 
 
 " TODO: remove this, use gundo
@@ -85,6 +85,12 @@ set noswapfile
   " set noundofile
   " " set undodir=/tmp/vimundo/
 " endif
+"+p"
+if has('persistent_undo')
+    set undofile                " So is persistent undo ...
+    set undolevels=1000         " Maximum number of changes that can be undone
+    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+endif
 
 set wildignore=*.swp,*.bak,*.pyc,*.class,.svn
 
@@ -96,7 +102,7 @@ set cursorline
 
 " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
 " 好处：误删什么的，如果以前屏幕打开，可以找回
-set t_ti= t_te=
+" set t_ti= t_te=
 
 
 " 鼠标暂不启用, 键盘党....
@@ -114,10 +120,10 @@ set selectmode=mouse,key
 " change the terminal's title
 set title
 " 去掉输入错误的提示声音
-set novisualbell
-set noerrorbells
-set t_vb=
-set tm=500
+" set novisualbell
+" set noerrorbells
+" set t_vb=
+" set tm=500
 
 " Remember info about open buffers on close
 set viminfo^=%
@@ -319,14 +325,34 @@ endif
 "==========================================
 " HotKey Settings  自定义快捷键设置
 "==========================================
+" 设置快捷键将系统剪贴板内容粘贴至 vim"
+
+" 依次遍历子窗口
+noremap <Leader>' vi'
+noremap <Leader>" vi"
+noremap <Leader>( vi(
+noremap <Leader>[ vi[
+noremap <Leader>{ vi{
+
+nmap <S-TAB> :bp<CR>
+nmap <Leader><TAB> :bn<CR>
+nmap <Leader>bd :bd<CR>
+
+" 行尾添加符号
+nmap <Leader>; $a;<esc>
+nmap <Leader>, $a,
+nmap <Leader>= $a => 
+nmap <Leader>: $a : 
+nmap <Leader>{ $a{ 
+nmap <Leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 
 " 主要按键重定义
 
 " 关闭方向键, 强迫自己用 hjkl
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+" map <Left> <Nop>
+" map <Right> <Nop>
+" map <Up> <Nop>
+" map <Down> <Nop>
 
 "Treat long lines as break lines (useful when moving around in them)
 "se swap之后，同物理行上线直接跳
@@ -439,8 +465,8 @@ nnoremap <silent> g* g*zz
 noremap <silent><leader>/ :nohls<CR>
 
 " switch # *
-nnoremap # *
-nnoremap * #
+" nnoremap # *
+" nnoremap * #
 
 " for # indent, python文件中输入新行时#号注释不切回行首
 autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
@@ -448,12 +474,12 @@ autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
 
 " tab/buffer相关
 
-" 切换前后buffer
-nnoremap [b :bprevious<cr>
-nnoremap ]b :bnext<cr>
-" 使用方向键切换buffer
-noremap <left> :bp<CR>
-noremap <right> :bn<CR>
+" " 切换前后buffer
+" nnoremap [b :bprevious<cr>
+" nnoremap ]b :bnext<cr>
+" " 使用方向键切换buffer
+" noremap <left> :bp<CR>
+" noremap <right> :bn<CR>
 
 
 " tab 操作
@@ -509,7 +535,8 @@ vnoremap > >gv
 map Y y$
 
 " 复制选中区到系统剪切板中
-vnoremap <leader>y "+y
+nmap <leader>y "+y
+nmap <leader><leader>p "+p
 
 " auto jump to end of select
 " vnoremap <silent> y y`]
@@ -526,11 +553,11 @@ nnoremap <leader>v V`}
 cmap w!! w !sudo tee >/dev/null %
 
 " kj 替换 Esc
-inoremap kj <Esc>
+" inoremap kj <Esc>
 
 " 滚动Speed up scrolling of the viewport slightly
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
+" nnoremap <C-e> 2<C-e>
+" nnoremap <C-y> 2<C-y>
 
 
 " Jump to start and end of line using the home row keys
@@ -543,6 +570,7 @@ nnoremap <leader>q :q<CR>
 
 " Quickly save the current file
 nnoremap <leader>w :w<CR>
+nnoremap <Leader>Q :qa!<CR>
 
 " 交换 ' `, 使得可以快速使用'跳到marked位置
 nnoremap ' `
@@ -663,8 +691,8 @@ endif
 set background=dark
 set t_Co=256
 
-colorscheme solarized
-" colorscheme molokai
+" colorscheme solarized
+colorscheme molokai
 " colorscheme desert
 
 
