@@ -229,7 +229,7 @@ set foldenable
 " syntax    使用语法定义折叠
 " diff      对没有更改的文本进行折叠
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=99
 " 代码折叠自定义快捷键 <leader>zz
 let g:FoldMethod = 0
@@ -367,17 +367,19 @@ if has("autocmd")
     " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-func! UniteSessionLoad() 
-    let sessionName = expand("%:p:h") 
-    execute "normal! :UniteSessionLoad " . sessionName . "\<CR>"
-endfunc 
-func! UniteSessionSave() 
-    let sessionName = expand("%:p:h") 
-    execute "normal! :UniteSessionSave " . sessionName . "\<CR>"
-endfunc 
+" func! UniteSessionLoad() 
+    " let sessionName = expand("%:p:h") 
+    " execute "normal! :UniteSessionLoad " . sessionName . "\<CR>"
+" endfunc 
+" func! UniteSessionSave() 
+    " let sessionName = expand("%:p:h") 
+    " execute "normal! :UniteSessionSave " . sessionName . "\<CR>"
+" endfunc 
 
-noremap <Leader>sr :call UniteSessionLoad()<CR>
-noremap <Leader>ss :call UniteSessionSave()<CR>
+" noremap <Leader>sr :call UniteSessionLoad()<CR>
+" noremap <Leader>ss :call UniteSessionSave()<CR>
+noremap <Leader>sr :UniteSessionLoad 
+noremap <Leader>ss :UniteSessionSave 
 
 
 "==========================================
@@ -401,7 +403,7 @@ nmap <Leader>= $a =>
 nmap <Leader>: $a : 
 nmap <Leader>{ $a{ 
 nmap <Leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
-
+nmap zz ^lza%<esc>
 " 主要按键重定义
 
 " 关闭方向键, 强迫自己用 hjkl
@@ -590,10 +592,6 @@ vnoremap > >gv
 " y$ -> Y Make Y behave like other capitals
 map Y y$
 
-" 复制选中区到系统剪切板中
-nmap <leader>y "+y
-nmap <leader>p "+p
-
 " auto jump to end of select
 " vnoremap <silent> y y`]
 " vnoremap <silent> p p`]
@@ -641,7 +639,7 @@ nnoremap U <C-r>
 nnoremap <leader>vi :vsplit $MYVIMRC<cr>
 nnoremap <leader>vib :vsplit $MYVIMRC.bundles<cr>
 
-nmap <leader>a yaw<esc>:Ag <c-r>"<cr>
+nmap <leader>aa yaw<esc>:Ag <c-r>"<cr>
 
 "==========================================
 " FileType Settings  文件类型设置
@@ -649,9 +647,10 @@ nmap <leader>a yaw<esc>:Ag <c-r>"<cr>
 
 " 具体编辑文件类型的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+" autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
+autocmd BufRead,BufNewFile *.ctp set filetype=html
 " disable showmatch when use > in php
 au BufWinEnter *.php set mps-=<:>
 
@@ -771,6 +770,7 @@ highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
+" 复制选中区到系统剪切板中
 nmap <leader>y "+y
 nmap <leader>p "+p
 

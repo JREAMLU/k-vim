@@ -60,7 +60,9 @@ Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'bronson/vim-trailing-whitespace'
 " easyalign
 " 快速赋值语句对齐
-" Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
+Plug 'Konfekt/FastFold'
+
 
 " quick movement
 " easymotion
@@ -166,6 +168,7 @@ Plug 'rking/ag.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-session'
 " Plug 'bling/vim-bufferline'
+Plug 'brookhong/DBGPavim'
 
 if count(g:bundle_groups, 'tmux')
     " tmux
@@ -256,7 +259,7 @@ endif
 
 if count(g:bundle_groups, 'html')
     " ###### emmet HTML complete #########
-    " Plug "mattn/emmet-vim"
+    Plug 'mattn/emmet-vim'
 endif
 
 if count(g:bundle_groups, 'nginx')
@@ -910,5 +913,25 @@ call plug#end()
             let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
             let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
     " }
+    "
+    " DBGPavim xdebug {{{
+        let g:dbgPavimBreakAtEntry = 0
+        let g:dbgPavimPort = 9009
+    " }}}
+
+    " FastFold {{{
+        let g:tex_fold_enabled=1
+        let g:vimsyn_folding='af'
+        let g:xml_syntax_folding = 1
+        let g:php_folding = 1
+        let g:perl_fold = 1
+    " }}}
+    " vim-easy-align {{{
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
+    " }}}
 
 "------------------------------------------- end of configs --------------------------------------------
