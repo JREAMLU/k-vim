@@ -396,6 +396,18 @@ nmap <S-TAB> :bp<CR>
 nmap <Leader><TAB> :bn<CR>
 nmap <Leader>bd :bd<CR>
 
+" 通过索引快速跳转
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
+
 " 行尾添加符号
 nmap <Leader>; $a;<esc>
 nmap <Leader>, $a,
@@ -528,6 +540,7 @@ noremap <silent><leader>/ :nohls<CR>
 
 " for # indent, python文件中输入新行时#号注释不切回行首
 autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
+autocmd BufNewFile,BufRead *.vue set filetype=html 
 
 
 " tab/buffer相关
@@ -540,34 +553,34 @@ autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
 " noremap <right> :bn<CR>
 
 
-" tab 操作
-" http://vim.wikia.com/wiki/Alternative_tab_navigation
-" http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
+" " tab 操作
+" " http://vim.wikia.com/wiki/Alternative_tab_navigation
+" " http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
 
-" tab切换
-map <leader>th :tabfirst<cr>
-map <leader>tl :tablast<cr>
+" " tab切换
+" map <leader>th :tabfirst<cr>
+" map <leader>tl :tablast<cr>
 
-map <leader>tj :tabnext<cr>
-map <leader>tk :tabprev<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprev<cr>
+" map <leader>tj :tabnext<cr>
+" map <leader>tk :tabprev<cr>
+" map <leader>tn :tabnext<cr>
+" map <leader>tp :tabprev<cr>
 
-map <leader>te :tabedit<cr>
-map <leader>td :tabclose<cr>
-map <leader>tm :tabm<cr>
+" map <leader>te :tabedit<cr>
+" map <leader>td :tabclose<cr>
+" map <leader>tm :tabm<cr>
 
-" normal模式下切换到确切的tab
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
+" " normal模式下切换到确切的tab
+" noremap <leader>1 1gt
+" noremap <leader>2 2gt
+" noremap <leader>3 3gt
+" noremap <leader>4 4gt
+" noremap <leader>5 5gt
+" noremap <leader>6 6gt
+" noremap <leader>7 7gt
+" noremap <leader>8 8gt
+" noremap <leader>9 9gt
+" noremap <leader>0 :tablast<cr>
 
 " Toggles between the active and last active tab "
 " The first tab is always 1 "
